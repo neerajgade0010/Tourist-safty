@@ -1,0 +1,7 @@
+POST http://localhost:5000/api/ai/chat
+Content-Type: application/json
+
+{
+  "message": "Is Manali safe?",
+  "location": "Manali"
+}
