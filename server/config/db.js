@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//Mongoose is a package that helps Node.js talk to MongoDB easily.
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);

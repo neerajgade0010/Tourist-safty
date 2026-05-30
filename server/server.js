@@ -23,11 +23,14 @@ const app = express();
 
 // ================= MIDDLEWARE =================
 const corsOptions = {
+  // check who is trying to access the backend origin  --> frontend url 
   origin: (origin, callback) => {
     // Allow requests with no origin (mobile apps, curl, Postman)
     if (!origin) return callback(null, true);
+    // create a list of frontend url 
     const allowed = (process.env.CLIENT_ORIGIN || "http://localhost:5173,http://localhost:5174")
       .split(",")
+      // remove extra spaces 
       .map((o) => o.trim());
     if (allowed.includes(origin)) {
       callback(null, true);
@@ -38,7 +41,9 @@ const corsOptions = {
   },
   credentials: true,
 };
+//activates the CORS middleware for all incoming requests
 app.use(cors(corsOptions));
+// convert incoming JSON data into req.body so the backend can easily read data sent from the frontend
 app.use(express.json());
 
 // ================= ROUTES =================

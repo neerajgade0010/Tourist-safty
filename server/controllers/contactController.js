@@ -50,6 +50,7 @@ export const deleteContact = async (req, res) => {
     if (!contact) {
       return res.status(404).json({ message: "Contact not found" });
     }
+    // abb sirf logged in admin apna hi delte ker sakta hain kisi aur ka nhi 
     if (contact.userId.toString() !== req.user.id) {
       return res.status(403).json({ message: "Forbidden" });
     }

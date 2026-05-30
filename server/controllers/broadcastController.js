@@ -14,6 +14,7 @@ export const createBroadcast = async (req, res) => {
     const broadcast = await Broadcast.create({
       message: message.trim(),
       createdBy: req.user.id,
+      // check the resci is array or not and if then store else left empty 
       recipients: Array.isArray(recipients) ? recipients : [],
     });
 
@@ -38,6 +39,7 @@ export const getActiveBroadcasts = async (req, res) => {
     // Return broadcasts that are active AND (sent to all OR include this user)
     const broadcasts = await Broadcast.find({
       active: true,
+      // check ker rhe hain ki ek true ho ya to sare broadcast ajaye ya to id wala 
       $or: [
         { recipients: { $size: 0 } },   // sent to all
         { recipients: userId },           // sent to this specific user
@@ -53,7 +55,7 @@ export const updateBroadcast = async (req, res) => {
   try {
     const broadcast = await Broadcast.findById(req.params.id);
     if (!broadcast) return res.status(404).json({ error: "Broadcast not found" });
-
+// broadcast ki jo bhi active feild hain frontend main main uske equal ker dunga current feild of active in backend 
     broadcast.active = req.body.active;
     await broadcast.save();
 

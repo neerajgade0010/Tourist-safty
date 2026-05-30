@@ -30,7 +30,7 @@ export const createIncident = async (req, res) => {
 export const getIncidents = async (req, res) => {
   try {
     const { swLat, swLng, neLat, neLng } = req.query;
-
+// south - west and north east map boundries 
     const incidents = await IncidentReport.find({
       resolved: false,
       lat: { $gte: Number(swLat), $lte: Number(neLat) },

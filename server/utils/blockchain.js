@@ -39,8 +39,9 @@ export const generateTouristId = (email) => {
 export const registerOnBlockchain = async (touristId, email) => {
   const c = getContract();
   if (!c) return null;
-
+   // transaction is mined and confirmed and then recipt is given 
   try {
+    // blockchain operation request 
     const tx = await c.registerTourist(touristId, email);
     const receipt = await tx.wait();
     return {
@@ -59,6 +60,7 @@ export const verifyOnBlockchain = async (touristId) => {
   if (!c) return null;
 
   try {
+    // arr des
     const [valid, email, registeredAt] = await c.verifyTourist(touristId);
     return {
       valid,

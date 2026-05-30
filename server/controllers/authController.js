@@ -8,6 +8,8 @@ const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 // ================= REGISTER =================
 export const register = async (req, res) => {
   try {
+    // get data from frontend request
+    //  body -->
     const { email, password, name } = req.body;
 
     if (!email || !password) {
@@ -24,7 +26,7 @@ export const register = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-
+    // 10 is the salt round more the value more secire but slow 
     const hashedPassword = await bcrypt.hash(password, 10);
     const touristId = generateTouristId(email);
 
